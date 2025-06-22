@@ -337,7 +337,7 @@ async function setupWalletConnection() {
             newBtn.disabled = false;
             newBtn.addEventListener('click', () => {
                 console.log('Redirecionando para dashboard');
-                window.location.href = '/airdropg-page/dashboard/'
+                window.location.href = window.location.origin + '/airdropg-page/dashboard/';
             });
         }
     
@@ -479,7 +479,7 @@ function setupModalEventListeners() {
     
     if (modalElements.goToDashboardBtn) {
         modalElements.goToDashboardBtn.addEventListener('click', () => {
-            window.location.href = '/airdropg-page/dashboard/'
+            window.location.href = window.location.origin + '/airdropg-page/dashboard/';
         });
     }
 }
@@ -823,7 +823,7 @@ async function finalizeWalletSetup(address) {
         
         // Redirecionar para o dashboard após breve delay
         setTimeout(() => {
-            window.location.href = '/airdropg-page/dashboard/'
+            window.location.href = window.location.origin + '/airdropg-page/dashboard/';
         }, 2000);
         
         return true;
