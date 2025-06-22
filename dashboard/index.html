@@ -1,0 +1,108 @@
+Marcelo Meloni <marcelomeloni022@gmail.com>
+	
+09:25 (há 0 minuto)
+	
+para mim
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunaryum | Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../style/dashboard.css">
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+    <style>
+      
+    </style>
+</head>
+<body>
+    <!-- Particle Background -->
+    <canvas id="particle-canvas"></canvas>
+    
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <div class="logo">
+                <span>SUNARYUM</span>
+            </div>
+        </div>
+        
+        <div class="streak-container">
+            <span class="streak-flame">🔥</span>
+            <span class="streak-text">Streak: <strong id="streakCounter">0 dias</strong></span>
+        </div>
+        
+        <div class="wallet-container">
+            <div class="wallet-address" id="wallet-dropdown">
+                <span id="walletAddress">0xAb...3F9D</span>
+                <span class="dropdown-icon"><i class="fas fa-chevron-down"></i></span>
+            </div>
+            
+            <div class="dropdown-menu" id="dropdown-menu">
+                
+                <div id="logoutButton"><i class="fas fa-sign-out-alt"></i> Logout</div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Dashboard Hero -->
+    <section class="dashboard-hero">
+        <div class="dashboard-stats">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-fire"></i></div>
+                <div class="stat-value" id="streakStat">0</div>
+                <div class="stat-label">Dias de Streak</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-coins"></i></div>
+                <div class="stat-value" id="pointsStat">0</div>
+                <div class="stat-label">Pontos Acumulados</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-wallet"></i></div>
+                <div class="stat-value" id="balanceStat">0 SUN</div>
+                <div class="stat-label">Saldo de Tokens</div>
+            </div>
+        </div>
+        
+        <button class="checkin-btn" id="checkin-btn">
+            <i class="fas fa-calendar-check"></i>
+            <span>Check-in Diário</span>
+        </button>
+    </section>
+    
+    <!-- Missões Diárias -->
+    <section class="missions-section">
+        <h2>Missões Diárias</h2>
+        <div class="missions-grid" id="missionsGrid">
+            <!-- Missões serão carregadas dinamicamente -->
+        </div>
+    </section>
+    
+    <!-- Conquistas -->
+    <section class="achievements-section">
+        <h2>Conquistas</h2>
+        <div class="achievements-grid" id="achievementsGrid">
+            <!-- Conquistas serão carregadas dinamicamente -->
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <p class="footer-message">Construindo um futuro mais limpo, um token de cada vez.</p>
+        <div class="footer-links">
+            <a href="#" class="footer-link">Termos</a>
+            <a href="#" class="footer-link">Privacidade</a>
+            <a href="#" class="footer-link">Suporte</a>
+        </div>
+        <p class="copyright">© 2023 Sunaryum. Todos os direitos reservados.</p>
+    </footer>
+    
+    <!-- Importar Supabase e dashboard.js -->
+    <script type="module" src="../supabase.js"></script>
+    <script type="module" src="../script/dashboard.js"></script>
+</body>
+</html>
