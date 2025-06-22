@@ -56,7 +56,7 @@ async function checkAuth() {
     
     if (!walletAddress) {
         console.log('Redirecionando para home.html');
-        window.location.href = "/airdropg-page/home/";
+        window.location.href = "/home/";
         return;
     }
     
@@ -790,7 +790,7 @@ function calculateNewStreak(lastCheckin) {
 function logout() {
     localStorage.removeItem('sunaryumWalletAddress');
     localStorage.removeItem('sunaryumUserId');
-    window.location.href = "/airdropg-page/home/";
+    window.location.href = "/home/";
 }
 
 // Efeito de confete
