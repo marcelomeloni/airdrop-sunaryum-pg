@@ -164,7 +164,7 @@ async function setupWalletConnection() {
     }
 
     // Configura listener para o botão de conexão
-    const connectBtn = document.getElementById('connectWalletBtn');
+   const connectBtn = document.getElementById('connectWalletBtn');
 if (connectBtn) {
     // Variável para controle de estado
     let isConnecting = false;
@@ -189,19 +189,16 @@ if (connectBtn) {
             return;
         }
 
-        // 🔥 Warm-up da API
+        // 🔥 Warm-up da API - VERSÃO CORRIGIDA
         try {
             console.log('[Warmup] Acordando API...');
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 3000);
+            const timestamp = new Date().getTime();
             
-            const pingResponse = await fetch('https://airdrop-sunaryum.onrender.com/api/wallet/ping', {
-                method: 'HEAD',
-                cache: 'no-cache',
-                signal: controller.signal
+            // Usando GET em vez de HEAD para melhor compatibilidade
+            const pingResponse = await fetch(`https://airdrop-sunaryum.onrender.com/api/wallet/ping?_=${timestamp}`, {
+                method: 'GET',
+                cache: 'no-cache'
             });
-            
-            clearTimeout(timeoutId);
             
             if (pingResponse.ok) {
                 console.log('[Warmup] API acordada com sucesso');
@@ -253,6 +250,30 @@ if (connectBtn) {
                 isConnecting = false;
             }
         }, 5000);
+    });
+}
+
+// Função para verificar a extensão (mantida igual)
+async function isExtensionInstalled() {
+    return new Promise((resolve) => {
+        // Verificação imediata
+        if (window.__SUNARYUM_EXTENSION_INSTALLED__) {
+            return resolve(true);
+        }
+        
+        // Verificação com timeout
+        const checkInterval = setInterval(() => {
+            if (window.__SUNARYUM_EXTENSION_INSTALLED__) {
+                clearInterval(checkInterval);
+                resolve(true);
+            }
+        }, 100);
+        
+        // Timeout final
+        setTimeout(() => {
+            clearInterval(checkInterval);
+            resolve(false);
+        }, 1000);
     });
 }
 
