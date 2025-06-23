@@ -27,11 +27,29 @@ function createParticlesForModal(container) {
         container.appendChild(particle);
     }
 }
-
+async function wakeUpAPI() {
+    try {
+        console.log('[WakeUp] Acordando API...');
+        const timestamp = new Date().getTime();
+        
+        const response = await fetch(`https://airdrop-sunaryum.onrender.com/api/wallet/ping?_=${timestamp}`, {
+            method: 'GET',
+            cache: 'no-cache'
+        });
+        
+        if (response.ok) {
+            console.log('[WakeUp] API acordada com sucesso');
+        } else {
+            console.warn('[WakeUp] API respondeu com status', response.status);
+        }
+    } catch (err) {
+        console.error('[WakeUp] Erro ao acordar API:', err);
+    }
+}
 function createParticles() {
     const particlesContainer = document.getElementById('particles');
     const particleCount = 30;
-
+     wakeUpAPI();
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
         particle.classList.add('particle');
