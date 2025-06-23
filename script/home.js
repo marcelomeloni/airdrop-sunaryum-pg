@@ -177,7 +177,15 @@ async function setupWalletConnection() {
                 openModal(noExtensionModal);
                 return;
             }
-
+            try {
+                console.log('Pré-carregando API...');
+                await fetch('https://airdrop-sunaryum.onrender.com/api/wallet/ping', {
+                    method: 'GET'
+                });
+                console.log('API acordada com sucesso.');
+            } catch (err) {
+                console.warn('Falha ao acordar API:', err);
+            }
             // Restante do processo de conexão...
             connectBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Conectando...';
             connectBtn.disabled = true;
