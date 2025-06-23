@@ -190,31 +190,7 @@ async function setupWalletConnection() {
         });
     }
 
-    // Função para mostrar alerta de extensão ausente
-    function showExtensionAlert() {
-        // Remove alertas anteriores
-        const existingAlert = document.querySelector('.extension-alert');
-        if (existingAlert) existingAlert.remove();
-
-        // Cria novo alerta
-        const alert = document.createElement('div');
-        alert.className = 'extension-alert';
-        alert.innerHTML = `
-            <div class="alert-content">
-                <i class="fas fa-exclamation-triangle"></i>
-                <h3>Extensão necessária!</h3>
-                <p>Para conectar sua carteira, instale a Sunaryum Wallet</p>
-                <button id="installExtensionBtn">Instalar Extensão</button>
-            </div>
-        `;
-        
-        document.body.appendChild(alert);
-        
-        // Adiciona ação ao botão de instalação
-        document.getElementById('installExtensionBtn').addEventListener('click', () => {
-            window.open('https://seusite.com/instalar-extensao', '_blank');
-        });
-    }
+ 
 
     // Configura listener para o botão de conexão
     if (connectBtn) {
@@ -720,9 +696,37 @@ const connectWithoutExtensionBtn = document.getElementById('connectWithoutExtens
 const createTab = document.querySelector('[data-tab="create"]');
 const importTab = document.querySelector('[data-tab="import"]');
 
-// Função para abrir um modal
+function resetModalState() {
+    modalState.isSeedVisible = false;
+    modalState.generated = false;
+    
+    // Reseta elementos visuais
+    if (modalElements.seedPhraseGrid) modalElements.seedPhraseGrid.innerHTML = '';
+    if (modalElements.importStatus) {
+        modalElements.importStatus.textContent = '';
+        modalElements.importStatus.className = 'status-message';
+    }
+    
+    // Reseta botão de geração
+    if (modalElements.generateSeedBtn) {
+        modalElements.generateSeedBtn.innerHTML = `
+            <i class="fas fa-sync"></i> Gerar Nova Seed
+        `;
+        modalElements.generateSeedBtn.disabled = false;
+    }
+    
+    updateVisibilityUI();
+    updateModalUIState();
+}
+
+// Modificado para abrir o modal corretamente
 function openModal(modal) {
     modal.style.display = 'flex';
+    
+    // Reseta o estado quando abre o modal de criação
+    if (modal.id === 'walletCreationModal') {
+        resetModalState();
+    }
 }
 
 // Função para fechar um modal
@@ -737,8 +741,7 @@ function setupModals() {
         connectWithoutExtensionBtn.addEventListener('click', () => {
             closeModal(noExtensionModal);
             openModal(walletCreationModal);
-            // Gera uma seed ao abrir o modal de criação
-            generateSeedPhrase();
+          
         });
     }
 
@@ -769,8 +772,6 @@ function setupModals() {
         createWalletOption.addEventListener('click', () => {
             closeModal(noExtensionModal);
             openModal(walletCreationModal);
-            // Gera uma seed ao abrir o modal de criação
-            generateSeedPhrase();
         });
     }
 
