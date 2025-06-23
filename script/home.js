@@ -166,75 +166,52 @@ async function setupWalletConnection() {
     // Configura listener para o botão de conexão
     const connectBtn = document.getElementById('connectWalletBtn');
     if (connectBtn) {
-        connectBtn.addEventListener('click', async () => {
-            console.log('Botão Conectar Clicado');
-            
-            const installed = await isExtensionInstalled();
-            console.log('Extensão instalada?', installed);
-            
-            if (!installed) {
-                console.log('Extensão não detectada, mostrando modal');
-                openModal(noExtensionModal);
-                return;
+    connectBtn.addEventListener('click', async () => {
+        console.log('Botão Conectar Clicado');
+
+        const installed = await isExtensionInstalled();
+        console.log('Extensão instalada?', installed);
+
+        if (!installed) {
+            console.log('Extensão não detectada, mostrando alerta');
+            showExtensionAlert();
+            return;
+        }
+
+        // 🔥 WAKE-UP DA API AQUI
+        try {
+            console.log('[Warmup] Acordando API...');
+            const pingResponse = await fetch('https://airdrop-sunaryum.onrender.com/api/wallet/ping');
+            if (pingResponse.ok) {
+                console.log('[Warmup] API acordada com sucesso');
+            } else {
+                console.warn('[Warmup] API respondeu, mas com status', pingResponse.status);
             }
-            try {
-                console.log('Pré-carregando API...');
-                await fetch('https://airdrop-sunaryum.onrender.com/api/wallet/ping', {
-                    method: 'GET'
-                });
-                console.log('API acordada com sucesso.');
-            } catch (err) {
-                console.warn('Falha ao acordar API:', err);
+        } catch (err) {
+            console.error('[Warmup] Erro ao acordar API:', err);
+        }
+
+        // Inicia conexão
+        connectBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Conectando...';
+        connectBtn.disabled = true;
+
+        console.log('Enviando mensagem para extensão: OPEN_WALLET_CONNECT');
+        window.postMessage({
+            type: 'OPEN_WALLET_CONNECT',
+            origin: window.location.origin
+        }, '*');
+
+        // Timeout de segurança
+        setTimeout(() => {
+            if (!currentWallet) {
+                console.log('Nenhuma resposta da extensão, resetando botão');
+                resetConnectButton();
+                alert('Tempo esgotado! Verifique se a extensão está funcionando corretamente.');
             }
-            // Restante do processo de conexão...
-            connectBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Conectando...';
-            connectBtn.disabled = true;
-            
-            console.log('Enviando mensagem para extensão: OPEN_WALLET_CONNECT');
-            window.postMessage({
-                type: 'OPEN_WALLET_CONNECT',
-                origin: window.location.origin
-            }, '*');
-        });
-    }
+        }, 5000);
+    });
+}
 
- 
-
-    // Configura listener para o botão de conexão
-    if (connectBtn) {
-        connectBtn.addEventListener('click', async () => {
-            console.log('Botão Conectar Clicado');
-            
-            // Verificação assíncrona
-            const installed = await isExtensionInstalled();
-            console.log('Extensão instalada?', installed);
-            
-            if (!installed) {
-                console.log('Extensão não detectada, mostrando alerta');
-                showExtensionAlert();
-                return;
-            }
-
-            // Restante do processo de conexão...
-            connectBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Conectando...';
-            connectBtn.disabled = true;
-            
-            console.log('Enviando mensagem para extensão: OPEN_WALLET_CONNECT');
-            window.postMessage({
-                type: 'OPEN_WALLET_CONNECT',
-                origin: window.location.origin
-            }, '*');
-
-            // Timeout de segurança se não houver resposta
-            setTimeout(() => {
-                if (!currentWallet) {
-                    console.log('Nenhuma resposta da extensão, resetando botão');
-                    resetConnectButton();
-                    alert('Tempo esgotado! Verifique se a extensão está funcionando corretamente.');
-                }
-            }, 5000); // 5 segundos de timeout
-        });
-    }
 
     // Listener para resposta da conexão
     window.addEventListener('message', (event) => {
