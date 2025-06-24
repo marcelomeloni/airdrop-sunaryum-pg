@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,7 +36,7 @@
     </script>
     
     <!-- Favicon -->
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -205,128 +205,40 @@
           height: calc(100% + 15px);
         }
       }
-
-      .bg-secondary {
-            background-color: #1a2a3a;
-        }
-        
-        .text-light {
-            color: #f0f0f0;
-        }
-        
-        .bg-dark {
-            background-color: #0d1b2a;
-        }
-        
-        .bg-primary {
-            background-color: #4f46e5;
-        }
-        
-        .hover\:bg-accent:hover {
-            background-color: #7c3aed;
-        }
-        
-        .backdrop-blur-sm {
-            backdrop-filter: blur(4px);
-        }
-        
-        .mobile-menu {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease-out;
-        }
-        
-        .mobile-menu.active {
-            max-height: 500px;
-        }
-        
-        .flag-icon {
-            width: 24px;
-            height: 18px;
-            border-radius: 2px;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-        
-        .flag-icon:hover {
-            transform: scale(1.1);
-        }
-        
-        .br-button {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            color: #d1d5db;
-            padding: 6px 12px;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
-        
-        .br-button:hover {
-            color: #fbbf24;
-            background: rgba(251, 191, 36, 0.1);
-        }
-        
-        .br-button-mobile {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            color: #d1d5db;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
-        
-        .br-button-mobile:hover {
-            color: #fbbf24;
-            background: rgba(251, 191, 36, 0.1);
-        }
     </style>
 </head>
 <body class="bg-secondary text-light font-sans overflow-x-hidden">
     <!-- Loader -->
     <div id="loader" class="fixed inset-0 bg-secondary z-50 flex items-center justify-center transition-opacity duration-500">
         <div class="animate-pulse">
-            <img style="width: auto; height: 50px;" src="images/simbolo.png">
+            <img style="width: auto; height: 50px;" src="../images/simbolo.png">
         </div>
     </div>
 
-     <!-- Navigation -->
-     <nav class="fixed w-full z-40 bg-secondary/90 backdrop-blur-sm transition-all duration-300">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-40 bg-secondary/90 backdrop-blur-sm transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center py-4">
                 <div class="flex items-center">
                     <a href="/" class="flex items-center">
-                        <img style="width: auto; height: 60px;" src="images/logo.png">
+                        <img style="width: auto; height: 60px;" src="../images/logo.png">
                     </a>
                 </div>
                 
                 <!-- Desktop Navigation -->
-                <div class="hidden md:flex items-center space-x-6">
-                    <a href="#sobre" class="text-gray-300 hover:text-primary transition-colors">About</a>
-                    <a href="#como-funciona" class="text-gray-300 hover:text-primary transition-colors">How it Works</a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#sobre" class="text-gray-300 hover:text-primary transition-colors">Sobre</a>
+                    <a href="#como-funciona" class="text-gray-300 hover:text-primary transition-colors">Como Funciona</a>
                     <a href="#roadmap" class="text-gray-300 hover:text-primary transition-colors">Roadmap</a>
-                    <a href="#comunidade" class="text-gray-300 hover:text-primary transition-colors">Community</a>
-                    <a target="_blank" href="whitepaper/" class="text-gray-300 hover:text-primary transition-colors">Whitepaper</a>
-                    
-                    <!-- Botão BR para versão em português -->
-                    <a href="/br/" class="br-button">
-                        <img src="https://flagcdn.com/24x18/br.png" class="flag-icon" alt="Bandeira do Brasil">
-                        <span>BR</span>
-                    </a>
-                    
-                    <a target="_blank" href="home/" class="bg-primary hover:bg-accent text-secondary font-semibold py-2 px-6 rounded-lg transition-all transform hover:scale-105">
+                    <a href="#comunidade" class="text-gray-300 hover:text-primary transition-colors">Comunidade</a>
+                    <a target="_blank" href="../whitepaper/" class="text-gray-300 hover:text-primary transition-colors">Whitepaper</a>
+                    <a target="_blank" href="../home/" class="bg-primary hover:bg-accent text-secondary font-semibold py-2 px-6 rounded-lg transition-all transform hover:scale-105">
                         Airdrop
                     </a>
                 </div>
                 
                 <!-- Mobile menu button -->
-                <div class="md:hidden flex items-center space-x-4">
-                    <!-- Botão BR para versão em português (mobile) -->
-                    <a href="/br/" class="flex items-center text-gray-300 hover:text-yellow-400" title="Versão em Português">
-                        <img src="https://flagcdn.com/24x18/br.png" class="flag-icon" alt="Bandeira do Brasil">
-                    </a>
-                    
+                <div class="md:hidden flex items-center">
                     <button id="mobile-menu-button" class="text-gray-300 hover:text-primary focus:outline-none">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -337,18 +249,14 @@
         </div>
         
         <!-- Mobile menu -->
-        <div id="mobile-menu" class="mobile-menu bg-dark/95 backdrop-blur-lg">
+        <div id="mobile-menu" class="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#sobre" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-dark/50">About</a>
-                <a href="#como-funciona" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-dark/50">How it Works</a>
-                <a href="#roadmap" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-dark/50">Roadmap</a>
-                <a href="#comunidade" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-dark/50">Community</a>
-                <a href="whitepaper/" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-dark/50">Whitepaper</a>
-                <a href="/br/index.html" class="br-button-mobile">
-                    <img src="https://flagcdn.com/24x18/br.png" class="flag-icon" alt="Bandeira do Brasil">
-                    Portuguese Version
-                </a>
-                <a href="/home" class="block mt-2 bg-primary text-secondary font-semibold py-2 px-4 rounded-lg text-center">
+                <a href="#sobre" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-dark">Sobre</a>
+                <a href="#como-funciona" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-dark">Como Funciona</a>
+                <a href="#roadmap" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-dark">Roadmap</a>
+                <a href="#comunidade" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-dark">Comunidade</a>
+                <a href="../whitepaper/" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-dark">Whitepaper</a>
+                <a href="../home/" class="block mt-2 bg-primary text-secondary font-semibold py-2 px-4 rounded-lg text-center">
                     Airdrop
                 </a>
             </div>
@@ -362,22 +270,22 @@
             <div class="hero-content flex flex-col items-center text-center max-w-3xl mx-auto">
                 <!-- Logo -->
                 <div class="mb-8 pulse">
-                    <img style="height: auto; width: 90px;" src="images/simbolo.png">
+                    <img style="height: auto; width: 90px;" src="../images/simbolo.png">
                 </div>
                 
                 <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 fade-in">
-                    Sunaryum: Tokenize Renewable Energy as RWA on Blockchain
+                    Sunaryum: Tokenize Energia Renovável como RWA em Blockchain
                 </h1>
                 <p class="text-xl text-gray-300 mb-10 fade-in">
-                    Join the clean energy P2P revolution. Earn $SUN tokens by connecting your micronode.
+                    Participe da revolução P2P de energia limpa. Ganhe tokens $SUN conectando seu micro-node.
                 </p>
                 
                 <div class="flex flex-col sm:flex-row gap-4 mb-12 fade-in">
-                    <a target="_blank" href="home/" class="bg-primary hover:bg-accent text-secondary font-bold py-4 px-8 rounded-lg transition-all transform hover:scale-105 shadow-lg shadow-primary/30">
-                        Join Airdrop
+                    <a target="_blank" href="../home/" class="bg-primary hover:bg-accent text-secondary font-bold py-4 px-8 rounded-lg transition-all transform hover:scale-105 shadow-lg shadow-primary/30">
+                        Participar do Airdrop
                     </a>
-                    <a target="_blank" href="whitepaper/" class="bg-transparent border-2 border-primary hover:bg-primary/10 text-primary font-bold py-4 px-8 rounded-lg transition-all">
-                        Read Whitepaper
+                    <a target="_blank" href="../whitepaper/" class="bg-transparent border-2 border-primary hover:bg-primary/10 text-primary font-bold py-4 px-8 rounded-lg transition-all">
+                        Ler Whitepaper
                     </a>
                 </div>
                 
@@ -391,11 +299,9 @@
     <section id="sobre" class="bg-dark">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 fade-in">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">About Sunaryum
-                </h2>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Sobre o Sunaryum</h2>
                 <p class="text-gray-300 max-w-3xl mx-auto">
-                    
-Sunaryum tokenizes kWh generated by micro-nodes, enabling fair rewards and P2P trading.
+                    Sunaryum tokeniza kWh gerados por micro-nodes, permitindo recompensa justa e P2P trading.
                 </p>
             </div>
             
@@ -406,9 +312,9 @@ Sunaryum tokenizes kWh generated by micro-nodes, enabling fair rewards and P2P t
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">View</h3>
+                    <h3 class="text-xl font-bold mb-3">Visão</h3>
                     <p class="text-gray-300">
-                        Create a decentralized global renewable energy network, democratizing access and participation.
+                        Criar uma rede global descentralizada de energia renovável, democratizando o acesso e a participação.
                     </p>
                 </div>
                 
@@ -418,10 +324,9 @@ Sunaryum tokenizes kWh generated by micro-nodes, enabling fair rewards and P2P t
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Mission</h3>
+                    <h3 class="text-xl font-bold mb-3">Missão</h3>
                     <p class="text-gray-300">
-                        
-Incentivize clean energy generation through fair rewards and blockchain technology.
+                        Incentivar a geração de energia limpa através de recompensas justas e tecnologia blockchain.
                     </p>
                 </div>
                 
@@ -431,10 +336,9 @@ Incentivize clean energy generation through fair rewards and blockchain technolo
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Value</h3>
+                    <h3 class="text-xl font-bold mb-3">Valor</h3>
                     <p class="text-gray-300">
-                        
-Transparency, sustainability, decentralization and fairness in the distribution of rewards.
+                        Transparência, sustentabilidade, descentralização e justiça na distribuição de recompensas.
                     </p>
                 </div>
                 
@@ -444,10 +348,9 @@ Transparency, sustainability, decentralization and fairness in the distribution 
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Technology</h3>
+                    <h3 class="text-xl font-bold mb-3">Tecnologia</h3>
                     <p class="text-gray-300">
-                        
-High-performance blockchain, IoT for sensing and smart contracts for automation.
+                        Blockchain de alto desempenho, IoT para sensoriamento e smart contracts para automatização.
                     </p>
                 </div>
             </div>
@@ -458,54 +361,45 @@ High-performance blockchain, IoT for sensing and smart contracts for automation.
     <section id="como-funciona" class="bg-secondary">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 fade-in">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">How It Works</h2>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Como Funciona</h2>
                 <p class="text-gray-300 max-w-3xl mx-auto">
-                    
-A simple process to turn your renewable energy into $SUN tokens
+                    Um processo simples para transformar sua energia renovável em tokens $SUN
                 </p>
             </div>
             
             <div class="max-w-4xl mx-auto">
                 <div class="timeline-item fade-in">
-                    <h3 class="text-xl font-bold mb-2">
-                        1. Connect Micro-Node</h3>
+                    <h3 class="text-xl font-bold mb-2">1. Conectar Micro-Node</h3>
                     <p class="text-gray-300">
-                        Install the hardware/sensor on your renewable energy generator and configure the firmware.
-
+                        Instale o hardware/sensor em seu gerador de energia renovável e configure o firmware.
                     </p>
                 </div>
                 
                 <div class="timeline-item fade-in">
-                    <h3 class="text-xl font-bold mb-2">2. Register Production
-                    </h3>
+                    <h3 class="text-xl font-bold mb-2">2. Registrar Produção</h3>
                     <p class="text-gray-300">
-                        Continuous sensing and recording of digitally signed data on the blockchain.
-
+                        Sensoriamento contínuo e registro de dados assinados digitalmente na blockchain.
                     </p>
                 </div>
                 
                 <div class="timeline-item fade-in">
-                    <h3 class="text-xl font-bold mb-2">
-                        3. Validation & Tolerance</h3>
+                    <h3 class="text-xl font-bold mb-2">3. Validação & Tolerância</h3>
                     <p class="text-gray-300">
-                        Daily verification (up to 5% variation allowed) and report sent to the Central Node.
-
+                        Verificação diária (até 5% de variação permitida) e relatório enviado ao Node Central.
                     </p>
                 </div>
                 
                 <div class="timeline-item fade-in">
-                    <h3 class="text-xl font-bold mb-2">4. Receive $SUN Tokens</h3>
+                    <h3 class="text-xl font-bold mb-2">4. Receber Tokens $SUN</h3>
                     <p class="text-gray-300">
-                        Reward proportional to the energy generated distributed via smart contract.
-
+                        Recompensa proporcional à energia gerada distribuída via smart contract.
                     </p>
                 </div>
                 
                 <div class="timeline-item fade-in">
-                    <h3 class="text-xl font-bold mb-2">5. Participate in the Community
-                    </h3>
+                    <h3 class="text-xl font-bold mb-2">5. Participar da Comunidade</h3>
                     <p class="text-gray-300">
-                        Share insights, propose improvements and engage in collaborative initiatives.
+                        Compartilhar insights, propor melhorias e engajar em iniciativas colaborativas.
                     </p>
                 </div>
             </div>
@@ -517,11 +411,10 @@ A simple process to turn your renewable energy into $SUN tokens
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold">Gamification</h3>
+                    <h3 class="text-xl font-bold">Gamificação</h3>
                 </div>
                 <p class="text-gray-300 mb-4">
-                    Complete each stage to unlock exclusive badges and increase your reputation in the community.
-
+                    Conclua cada etapa para desbloquear badges exclusivos e aumentar sua reputação na comunidade.
                 </p>
                 <div class="flex justify-center gap-4">
                     <div class="badge bg-gray-800 p-4 rounded-full">
@@ -551,8 +444,7 @@ A simple process to turn your renewable energy into $SUN tokens
         <div class="text-center mb-16 fade-in">
             <h2 class="text-3xl md:text-4xl font-bold mb-4">Tokenomics</h2>
             <p class="text-gray-300 max-w-3xl mx-auto">
-                $SUN Genesis Block Distribution
-
+                Distribuição do Bloco Gênesis $SUN
             </p>
         </div>
         
@@ -563,7 +455,7 @@ A simple process to turn your renewable energy into $SUN tokens
                         <div class="text-center">
                             <div class="text-3xl font-bold">10K</div>
                             <div class="text-primary">$SUN</div>
-                            <div class="text-sm text-gray-300 mt-2">Genesis Supply</div>
+                            <div class="text-sm text-gray-300 mt-2">Gênesis Supply</div>
                         </div>
                     </div>
                     <svg viewBox="0 0 36 36" class="circular-chart">
@@ -591,24 +483,24 @@ A simple process to turn your renewable energy into $SUN tokens
                     </div>
                     <div class="flex items-center">
                         <div class="w-4 h-4 bg-gray-400 rounded mr-2"></div>
-                        <span class="text-sm">Devs: 20%</span>
+                        <span class="text-sm">Desenv: 20%</span>
                     </div>
                     <div class="flex items-center col-span-2">
                         <div class="w-4 h-4 bg-green-400 rounded mr-2"></div>
-                        <span class="text-sm">Marketing/Partners: 15%</span>
+                        <span class="text-sm">Marketing/Parceiros: 15%</span>
                     </div>
                 </div>
             </div>
             
             <div class="fade-in">
                 <div class="bg-gray-900/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-800 mb-8">
-                    <h3 class="text-xl font-bold mb-6 text-primary">Distribution by Participation</h3>
+                    <h3 class="text-xl font-bold mb-6 text-primary">Distribuição por Participação</h3>
                     <div class="space-y-6">
                         <div>
                             <div class="flex justify-between mb-2">
                                 <div>
                                     <span class="font-medium">Airdrop - Stage 1</span>
-                                    <span class="text-xs text-gray-400 block">First participants</span>
+                                    <span class="text-xs text-gray-400 block">Primeiros participantes</span>
                                 </div>
                                 <span>30%</span>
                             </div>
@@ -621,8 +513,7 @@ A simple process to turn your renewable energy into $SUN tokens
                             <div class="flex justify-between mb-2">
                                 <div>
                                     <span class="font-medium">Airdrop - Stage 2</span>
-                                    <span class="text-xs text-gray-400 block">
-                                        Second wave of participants</span>
+                                    <span class="text-xs text-gray-400 block">Segunda leva de participantes</span>
                                 </div>
                                 <span>20%</span>
                             </div>
@@ -635,8 +526,7 @@ A simple process to turn your renewable energy into $SUN tokens
                             <div class="flex justify-between mb-2">
                                 <div>
                                     <span class="font-medium">Airdrop - Stage 3</span>
-                                    <span class="text-xs text-gray-400 block">
-                                        Late entrants</span>
+                                    <span class="text-xs text-gray-400 block">Participantes tardios</span>
                                 </div>
                                 <span>15%</span>
                             </div>
@@ -648,9 +538,8 @@ A simple process to turn your renewable energy into $SUN tokens
                         <div>
                             <div class="flex justify-between mb-2">
                                 <div>
-                                    <span class="font-medium">Development</span>
-                                    <span class="text-xs text-gray-400 block">
-                                        Team and infrastructure</span>
+                                    <span class="font-medium">Desenvolvimento</span>
+                                    <span class="text-xs text-gray-400 block">Equipe e infraestrutura</span>
                                 </div>
                                 <span>20%</span>
                             </div>
@@ -662,9 +551,8 @@ A simple process to turn your renewable energy into $SUN tokens
                         <div>
                             <div class="flex justify-between mb-2">
                                 <div>
-                                    <span class="font-medium">Marketing/Partners</span>
-                                    <span class="text-xs text-gray-400 block">Strategic partnerships
-                                    </span>
+                                    <span class="font-medium">Marketing/Parceiros</span>
+                                    <span class="text-xs text-gray-400 block">Parcerias estratégicas</span>
                                 </div>
                                 <span>15%</span>
                             </div>
@@ -676,7 +564,7 @@ A simple process to turn your renewable energy into $SUN tokens
                 </div>
                 
                 <div class="bg-gray-900/50 backdrop-blur-sm p-6 rounded-2xl border border-gray-800">
-                    <h3 class="text-lg font-bold mb-4 text-primary">Stages Benefits</h3>
+                    <h3 class="text-lg font-bold mb-4 text-primary">Benefícios por Estágio</h3>
                     <div class="grid grid-cols-3 gap-4">
                         <div class="text-center bg-dark p-4 rounded-lg">
                             <div class="text-2xl font-bold text-primary mb-2">Stage 1</div>
@@ -692,7 +580,7 @@ A simple process to turn your renewable energy into $SUN tokens
                         </div>
                     </div>
                     <p class="text-gray-300 mt-4 text-sm italic">
-                        The sooner you participate, the greater your participation in the Genesis Block
+                        Quanto antes participar, maior sua participação no Bloco Gênesis
                     </p>
                 </div>
             </div>
@@ -702,23 +590,23 @@ A simple process to turn your renewable energy into $SUN tokens
             <div class="bg-gradient-to-r from-primary/20 to-accent/20 p-8 rounded-2xl border border-primary/30">
                 <div class="flex flex-col md:flex-row items-center justify-between gap-6">
                     <div>
-                        <h3 class="text-xl font-bold mb-2">Secure your position in Stage 1!</h3>
+                        <h3 class="text-xl font-bold mb-2">Garanta sua posição no Stage 1!</h3>
                         <p class="text-gray-300">
-                            The first participants receive 30% of the distribution of the Genesis Block.
+                            Os primeiros participantes recebem 30% da distribuição do Bloco Gênesis.
                         </p>
                     </div>
-                    <a target="_blank" href="home/" class="bg-primary hover:bg-accent text-secondary font-bold py-3 px-8 rounded-lg transition-all transform hover:scale-105 whitespace-nowrap">
-                        Join Airdrop
+                    <a target="_blank" href="../home/" class="bg-primary hover:bg-accent text-secondary font-bold py-3 px-8 rounded-lg transition-all transform hover:scale-105 whitespace-nowrap">
+                        Participar do Airdrop
                     </a>
                 </div>
             </div>
             
             <div class="mt-8 text-center">
-                <a target="_blank" href="whitepaper/" class="inline-flex items-center text-primary hover:text-accent transition-colors">
+                <a target="_blank" href="../whitepaper/" class="inline-flex items-center text-primary hover:text-accent transition-colors">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                     </svg>
-                    See full details in the Whitepaper
+                    Veja detalhes completos no Whitepaper
                 </a>
             </div>
         </div>
@@ -731,7 +619,7 @@ A simple process to turn your renewable energy into $SUN tokens
             <div class="text-center mb-16 fade-in">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Roadmap</h2>
                 <p class="text-gray-300 max-w-3xl mx-auto">
-                    Our strategic plan to revolutionize renewable energy
+                    Nosso plano estratégico para revolucionar a energia renovável
                 </p>
             </div>
             
@@ -744,7 +632,7 @@ A simple process to turn your renewable energy into $SUN tokens
                                 <div class="w-4 h-4 bg-secondary rounded-full"></div>
                             </div>
                             <div class="absolute top-full left-1/2 transform -translate-x-1/2 mt-4 w-40 text-center">
-                                <div class="font-bold text-primary">Jun–Aug 2025</div>
+                                <div class="font-bold text-primary">Jun–Ago 2025</div>
                                 <div class="text-sm text-gray-300">Airdrop</div>
                             </div>
                         </div>
@@ -754,8 +642,8 @@ A simple process to turn your renewable energy into $SUN tokens
                                 <div class="w-4 h-4 bg-secondary rounded-full"></div>
                             </div>
                             <div class="absolute top-full left-1/2 transform -translate-x-1/2 mt-4 w-40 text-center">
-                                <div class="font-bold text-primary">Sep–Dec 2025</div>
-                                <div class="text-sm text-gray-300">Prototyping</div>
+                                <div class="font-bold text-primary">Set–Dez 2025</div>
+                                <div class="text-sm text-gray-300">Prototipagem</div>
                             </div>
                         </div>
                         
@@ -774,7 +662,7 @@ A simple process to turn your renewable energy into $SUN tokens
                                 <div class="w-4 h-4 bg-gray-400 rounded-full"></div>
                             </div>
                             <div class="absolute top-full left-1/2 transform -translate-x-1/2 mt-4 w-40 text-center">
-                                <div class="font-bold text-gray-400">Apr–Jun 2026</div>
+                                <div class="font-bold text-gray-400">Abr–Jun 2026</div>
                                 <div class="text-sm text-gray-400">Mainnet</div>
                             </div>
                         </div>
@@ -785,7 +673,7 @@ A simple process to turn your renewable energy into $SUN tokens
                             </div>
                             <div class="absolute top-full left-1/2 transform -translate-x-1/2 mt-4 w-40 text-center">
                                 <div class="font-bold text-gray-400">Jul 2026+</div>
-                                <div class="text-sm text-gray-400">Expansion</div>
+                                <div class="text-sm text-gray-400">Expansão</div>
                             </div>
                         </div>
                     </div>
@@ -794,22 +682,22 @@ A simple process to turn your renewable energy into $SUN tokens
                 <!-- Mobile roadmap -->
                 <div class="sm:hidden space-y-8 max-w-md mx-auto">
                     <div class="bg-dark p-6 rounded-2xl fade-in">
-                        <div class="font-bold text-primary mb-2">Jun–Aug 2025</div>
+                        <div class="font-bold text-primary mb-2">Jun–Ago 2025</div>
                         <h3 class="text-xl font-bold mb-3">Airdrop</h3>
                         <ul class="list-disc pl-5 text-gray-300 space-y-1">
-                            <li>Airdrop campaign launch</li>
-                            <li>Initial distribution of $SUN tokens</li>
-                            <li>Initial community formation</li>
+                            <li>Lançamento da campanha de airdrop</li>
+                            <li>Distribuição inicial de tokens $SUN</li>
+                            <li>Formação da comunidade inicial</li>
                         </ul>
                     </div>
                     
                     <div class="bg-dark p-6 rounded-2xl fade-in">
-                        <div class="font-bold text-primary mb-2">Sep–Dec 2025</div>
-                        <h3 class="text-xl font-bold mb-3">Prototyping</h3>
+                        <div class="font-bold text-primary mb-2">Set–Dez 2025</div>
+                        <h3 class="text-xl font-bold mb-3">Prototipagem</h3>
                         <ul class="list-disc pl-5 text-gray-300 space-y-1">
-                            <li>Micro-node hardware development</li>
-                            <li>Initial sensing tests</li>
-                            <li>First version of smart contracts</li>
+                            <li>Desenvolvimento do hardware de micro-node</li>
+                            <li>Testes de sensoriamento inicial</li>
+                            <li>Primeira versão dos smart contracts</li>
                         </ul>
                     </div>
                     
@@ -817,9 +705,9 @@ A simple process to turn your renewable energy into $SUN tokens
                         <div class="font-bold text-gray-400 mb-2">Jan–Mar 2026</div>
                         <h3 class="text-xl font-bold mb-3">Testnet</h3>
                         <ul class="list-disc pl-5 text-gray-400 space-y-1">
-                            <li>Test Network Deployment</li>
-                            <li>Testing with selected users</li>
-                            <li>Performance optimization</li>
+                            <li>Implantação da rede de teste</li>
+                            <li>Testes com usuários selecionados</li>
+                            <li>Otimização de desempenho</li>
                         </ul>
                     </div>
                 </div>
@@ -833,11 +721,9 @@ A simple process to turn your renewable energy into $SUN tokens
     <section id="beneficios" class="bg-dark">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 fade-in">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">
-                    Benefits and Use Cases</h2>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Benefícios e Casos de Uso</h2>
                 <p class="text-gray-300 max-w-3xl mx-auto">
-                    Why join the Sunaryum revolution
-
+                    Por que participar da revolução Sunaryum
                 </p>
             </div>
             
@@ -848,9 +734,9 @@ A simple process to turn your renewable energy into $SUN tokens
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Fair Reward</h3>
+                    <h3 class="text-xl font-bold mb-3">Recompensa Justa</h3>
                     <p class="text-gray-300">
-                        Receive $SUN tokens proportionally to the energy generated, with automatic payments via smart contracts.
+                        Receba tokens $SUN proporcionalmente à energia gerada, com pagamentos automáticos via smart contracts.
                     </p>
                 </div>
                 
@@ -862,7 +748,7 @@ A simple process to turn your renewable energy into $SUN tokens
                     </div>
                     <h3 class="text-xl font-bold mb-3">Trading P2P</h3>
                     <p class="text-gray-300">
-                        Trade energy directly with other participants, without intermediaries and with minimal fees.
+                        Negocie energia diretamente com outros participantes, sem intermediários e com taxas mínimas.
                     </p>
                 </div>
                 
@@ -872,11 +758,9 @@ A simple process to turn your renewable energy into $SUN tokens
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Participatory Governance
-                    </h3>
+                    <h3 class="text-xl font-bold mb-3">Governança Participativa</h3>
                     <p class="text-gray-300">
-                        Participate in protocol decisions through direct voting with your $SUN tokens.
-
+                        Participe das decisões do protocolo através de votação direta com seus tokens $SUN.
                     </p>
                 </div>
                 
@@ -886,11 +770,9 @@ A simple process to turn your renewable energy into $SUN tokens
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">EV Integration
-                    </h3>
+                    <h3 class="text-xl font-bold mb-3">Integração EV</h3>
                     <p class="text-gray-300">
-                        Use $SUN tokens to recharge electric vehicles at partner locations.
-
+                        Utilize tokens $SUN para recarga de veículos elétricos em pontos parceiros.
                     </p>
                 </div>
                 
@@ -900,11 +782,9 @@ A simple process to turn your renewable energy into $SUN tokens
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">RWA Diversification
-                    </h3>
+                    <h3 class="text-xl font-bold mb-3">Diversificação de RWA</h3>
                     <p class="text-gray-300">
-                        Access to renewable energy investments as tokenized real-world assets.
-
+                        Acesso a investimentos em energia renovável como ativos do mundo real tokenizados.
                     </p>
                 </div>
                 
@@ -914,11 +794,9 @@ A simple process to turn your renewable energy into $SUN tokens
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Clean Energy Incentive
-                    </h3>
+                    <h3 class="text-xl font-bold mb-3">Incentivo à Energia Limpa</h3>
                     <p class="text-gray-300">
-                        Actively contribute to the global energy transition and reduction of carbon emissions.
-
+                        Contribua ativamente para a transição energética global e redução de emissões de carbono.
                     </p>
                 </div>
             </div>
@@ -929,22 +807,20 @@ A simple process to turn your renewable energy into $SUN tokens
     <section id="comunidade" class="bg-secondary">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 fade-in">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Community</h2>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Comunidade</h2>
                 <p class="text-gray-300 max-w-3xl mx-auto">
-                    Join thousands of pioneers in the renewable energy revolution
-
+                    Junte-se a milhares de pioneiros na revolução da energia renovável
                 </p>
             </div>
             
             <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-12">
                 <div class="fade-in">
                     <div class="bg-dark/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-800 mb-8">
-                        <h3 class="text-xl font-bold mb-6 text-center">Community Statistics
-                        </h3>
+                        <h3 class="text-xl font-bold mb-6 text-center">Estatísticas da Comunidade</h3>
                         <div class="grid grid-cols-2 gap-6">
                             <div class="text-center">
                                 <div class="text-4xl font-bold text-primary">2</div>
-                                <div class="text-gray-300">Members</div>
+                                <div class="text-gray-300">Membros</div>
                             </div>
                             <div class="text-center">
                                 <div class="text-4xl font-bold text-primary">0</div>
@@ -952,13 +828,11 @@ A simple process to turn your renewable energy into $SUN tokens
                             </div>
                             <div class="text-center">
                                 <div class="text-4xl font-bold text-primary">1</div>
-                                <div class="text-gray-300">Countries
-                                </div>
+                                <div class="text-gray-300">Países</div>
                             </div>
                             <div class="text-center">
                                 <div class="text-4xl font-bold text-primary">0</div>
-                                <div class="text-gray-300">kWh Generated
-                                </div>
+                                <div class="text-gray-300">kWh Gerados</div>
                             </div>
                         </div>
                     </div>
@@ -970,12 +844,10 @@ A simple process to turn your renewable energy into $SUN tokens
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                                 </svg>
                             </div>
-                            <h3 class="text-xl font-bold">Community Badge
-                            </h3>
+                            <h3 class="text-xl font-bold">Badge de Comunidade</h3>
                         </div>
                         <p class="text-gray-300 mb-4">
-                            Earn the Community Badge: Actively participate and help moderate our community.
-
+                            Conquiste o Badge Comunidade: Participe ativamente e ajude a moderar nossa comunidade.
                         </p>
                         <div class="flex justify-center">
                             <div class="badge bg-gradient-to-br from-primary to-accent p-6 rounded-full">
@@ -989,8 +861,7 @@ A simple process to turn your renewable energy into $SUN tokens
                 
                 <div class="fade-in">
                     <div class="bg-dark/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-800 h-full">
-                        <h3 class="text-xl font-bold mb-6 text-center">Connect with Us
-                        </h3>
+                        <h3 class="text-xl font-bold mb-6 text-center">Conecte-se Conosco</h3>
                         <div class="grid grid-cols-2 gap-4">
                             <a target="_blank" href="https://discord.gg/AZ2TtgAFHz" class="flex items-center justify-center bg-gray-800 hover:bg-gray-700 p-4 rounded-lg transition-all">
                                 <svg class="w-6 h-6 text-[#5865F2] mr-2" fill="currentColor" viewBox="0 0 24 24">
@@ -1030,10 +901,9 @@ A simple process to turn your renewable energy into $SUN tokens
     <section id="recursos" class="bg-dark">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 fade-in">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Features</h2>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Recursos</h2>
                 <p class="text-gray-300 max-w-3xl mx-auto">
-                    Documentation and materials to help you learn more
-
+                    Documentação e materiais para você se aprofundar
                 </p>
             </div>
             
@@ -1048,11 +918,10 @@ A simple process to turn your renewable energy into $SUN tokens
                         <div>
                             <h3 class="text-xl font-bold mb-2">Whitepaper</h3>
                             <p class="text-gray-300 mb-4">
-                                Complete document with technical details, tokenomics and project vision.
-
+                                Documento completo com detalhes técnicos, tokenomics e visão do projeto.
                             </p>
-                            <a href="whitepaper/" class="inline-flex items-center text-primary hover:text-accent transition-colors">
-                                Download PDF
+                            <a href="#" class="inline-flex items-center text-primary hover:text-accent transition-colors">
+                                Baixar PDF
                                 <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                                 </svg>
@@ -1069,15 +938,12 @@ A simple process to turn your renewable energy into $SUN tokens
                             </svg>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold mb-2">Technical Documentation
-                            </h3>
+                            <h3 class="text-xl font-bold mb-2">Documentação Técnica</h3>
                             <p class="text-gray-300 mb-4">
-                                Detailed guides for developers, API integration and smart contracts.
-
+                                Guias detalhados para desenvolvedores, integração de APIs e smart contracts.
                             </p>
                             <a href="#" class="inline-flex items-center text-primary hover:text-accent transition-colors">
-                                Access Docs
-
+                                Acessar Docs
                                 <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                                 </svg>
@@ -1088,17 +954,14 @@ A simple process to turn your renewable energy into $SUN tokens
             </div>
             
             <div class="max-w-2xl mx-auto mt-16 bg-gray-900 rounded-2xl p-8 border border-gray-800 fade-in">
-                <h3 class="text-xl font-bold mb-6 text-center">Receive Updates
-                </h3>
+                <h3 class="text-xl font-bold mb-6 text-center">Receba Atualizações</h3>
                 <p class="text-gray-300 mb-6 text-center">
-                    Sign up to receive the latest news about the project and the airdrop
-
+                    Inscreva-se para receber as últimas novidades sobre o projeto e o airdrop
                 </p>
                 <form class="flex flex-col sm:flex-row gap-4">
                     <input type="email" placeholder="Seu melhor email" class="flex-grow bg-gray-800 border border-gray-700 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
                     <button type="submit" class="bg-primary hover:bg-accent text-secondary font-bold py-3 px-8 rounded-lg transition-colors">
-                        Subscribe
-
+                        Inscrever-se
                     </button>
                 </form>
             </div>
@@ -1109,16 +972,13 @@ A simple process to turn your renewable energy into $SUN tokens
     <section class="relative py-24 bg-gradient-to-br from-primary to-accent">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div class="max-w-3xl mx-auto">
-                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-secondary">Join the Clean Energy Revolution
-                </h2>
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-secondary">Participe da Revolução da Energia Limpa</h2>
                 <p class="text-secondary/90 mb-10 text-xl">
-                    Join thousands of pioneers and start generating value with your renewable energy
-
+                    Junte-se a milhares de pioneiros e comece a gerar valor com sua energia renovável
                 </p>
                 
                 <a href="/home" class="inline-block bg-secondary hover:bg-gray-900 text-primary font-bold py-4 px-12 rounded-lg transition-all transform hover:scale-105 shadow-lg mb-12">
-                    Join the Airdrop Now
-
+                    Participar do Airdrop Agora
                 </a>
                 
                 <div class="flex justify-center">
@@ -1162,7 +1022,7 @@ A simple process to turn your renewable energy into $SUN tokens
                         <span class="text-xl font-bold">Sunaryum</span>
                     </div>
                     <p class="text-gray-400 mb-4">
-                        Tokenizing renewable energy as a Real World Asset on blockchain.
+                        Tokenizando energia renovável como Real World Asset em blockchain.
                     </p>
                     <div class="flex space-x-4">
                         <a href="https://x.com/sunaryum" class="text-gray-400 hover:text-primary transition-colors">
@@ -1185,13 +1045,12 @@ A simple process to turn your renewable energy into $SUN tokens
                 </div>
                 
                 <div>
-                    <h3 class="text-lg font-bold mb-6">Quick Links
-                    </h3>
+                    <h3 class="text-lg font-bold mb-6">Links Rápidos</h3>
                     <ul class="space-y-3">
-                        <li><a href="/" class="text-gray-400 hover:text-primary transition-colors">Home</a></li>
-                        <li><a target="_blank" href="home/" class="text-gray-400 hover:text-primary transition-colors">Airdrop</a></li>
-                        <li><a target="_blank" href="whitepaper/" class="text-gray-400 hover:text-primary transition-colors">Whitepaper</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Documentation</a></li>
+                        <li><a href="../" class="text-gray-400 hover:text-primary transition-colors">Home</a></li>
+                        <li><a target="_blank" href="../home/" class="text-gray-400 hover:text-primary transition-colors">Airdrop</a></li>
+                        <li><a target="_blank" href="../whitepaper/" class="text-gray-400 hover:text-primary transition-colors">Whitepaper</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Documentação</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Blog</a></li>
                     </ul>
                 </div>
@@ -1199,18 +1058,15 @@ A simple process to turn your renewable energy into $SUN tokens
                 <div>
                     <h3 class="text-lg font-bold mb-6">Legal</h3>
                     <ul class="space-y-3">
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Privacy
-                        </a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Terms of Use
-                        </a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Cookies Policy
-                        </a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Disclaimer</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Privacidade</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Termos de Uso</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Política de Cookies</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Isenção de Responsabilidade</a></li>
                     </ul>
                 </div>
                 
                 <div>
-                    <h3 class="text-lg font-bold mb-6">Contact</h3>
+                    <h3 class="text-lg font-bold mb-6">Contato</h3>
                     <ul class="space-y-3">
                         <li class="text-gray-400">kwedo@gmx.com</li>
                         <li class="text-gray-400">Espirito Santo do Pinhal, Brasil</li>
@@ -1220,9 +1076,8 @@ A simple process to turn your renewable energy into $SUN tokens
             
             <div class="border-t border-gray-800 pt-8 text-center">
                 <p class="text-gray-500 text-sm">
-                    &copy; 2025 Sunaryum. All rights reserved.<br>
-                    Sunaryum is a blockchain platform that tokenizes real energy assets, promoting the transition to renewable sources.
-
+                    &copy; 2025 Sunaryum. Todos os direitos reservados.<br>
+                    Sunaryum é uma plataforma blockchain que tokeniza ativos de energia real, promovendo transição para fontes renováveis.
                 </p>
             </div>
         </div>

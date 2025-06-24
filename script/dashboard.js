@@ -19,29 +19,29 @@ let isProcessingMission = false;
 // Inicialização
 document.addEventListener('DOMContentLoaded', async () => {
     console.log('Dashboard iniciado');
-    
+
     try {
         // Verificar autenticação
         await checkAuth();
-        
+
         // Carregar dados do usuário
         await loadUserData();
-        
+
         // Carregar missões
         await loadMissions();
-        
+
         // Configurar eventos de verificação de links
         setupLinkVerification();
-        
+
         // Carregar conquistas
         await loadAchievements();
-        
+
         // Verificar conquistas
         await checkAchievements();
-        
+
         // Configurar eventos
         setupEventListeners();
-        
+
     } catch (error) {
         console.error('Erro na inicialização:', error);
     }
@@ -51,15 +51,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 async function checkAuth() {
     const walletAddress = localStorage.getItem('sunaryumWalletAddress');
     const userId = localStorage.getItem('sunaryumUserId');
-    
+
     console.log('Verificando autenticação:', { walletAddress, userId });
-    
+
     if (!walletAddress) {
         console.log('Redirecionando para home.html');
         window.location.href = "/home/";
         return;
     }
-    
+
     // Atualiza UI com endereço
     if (walletAddressElement) {
         const shortAddress = `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`;
@@ -71,41 +71,41 @@ async function checkAuth() {
 async function loadUserData() {
     const walletAddress = localStorage.getItem('sunaryumWalletAddress');
     const userId = localStorage.getItem('sunaryumUserId');
-    
+
     console.log('Carregando dados do usuário:', { walletAddress, userId });
-    
+
     try {
         let query = supabase
             .from('users')
             .select('*');
-            
+
         if (userId) {
             query = query.eq('id', userId);
         } else {
             query = query.eq('wallet_address', walletAddress);
         }
-        
+
         const { data: user, error } = await query.single();
-        
+
         if (error) {
             console.error('Erro ao buscar usuário:', error);
             throw error;
         }
-        
+
         if (!user) {
             console.log('Usuário não encontrado, criando novo...');
             await createNewUser(walletAddress);
             return;
         }
-        
+
         userData = user;
         currentUser = user;
-        
+
         // Atualizar UI com dados do usuário
         updateUserUI();
     } catch (error) {
         console.error('Erro ao carregar dados do usuário:', error);
-        
+
         // Criar novo usuário se não existir
         if (error.message.includes('0 rows')) {
             await createNewUser(walletAddress);
@@ -116,10 +116,10 @@ async function loadUserData() {
 // Atualiza a interface com os dados do usuário
 function hasCheckedInToday() {
     if (!userData || !userData.last_checkin) return false;
-    
+
     const lastCheckin = new Date(userData.last_checkin);
     const today = new Date();
-    
+
     return (
         lastCheckin.getDate() === today.getDate() &&
         lastCheckin.getMonth() === today.getMonth() &&
@@ -133,9 +133,9 @@ function updateUserUI() {
         console.warn('Nenhum dado de usuário para atualizar UI');
         return;
     }
-    
+
     console.log('Atualizando UI com dados:', userData);
-    
+
     // Atualiza streak
     if (streakCounter) {
         streakCounter.innerHTML = `<strong>${userData.streak || 0} dias</strong>`;
@@ -143,17 +143,17 @@ function updateUserUI() {
     if (streakStat) {
         streakStat.textContent = userData.streak || 0;
     }
-    
+
     // Atualiza pontos
     if (pointsStat) {
         pointsStat.textContent = userData.total_points || 0;
     }
-    
+
     // Atualiza saldo
     if (balanceStat) {
         balanceStat.textContent = `${userData.sun_balance || 0} SUN`;
     }
-    
+
     // Atualiza estado do botão de check-in
     updateCheckinButtonState();
 }
@@ -161,47 +161,47 @@ function updateUserUI() {
 // Nova função para atualizar o estado do botão de check-in
 function updateCheckinButtonState() {
     if (!checkinBtn) return;
-    
+
     if (hasCheckedInToday()) {
         checkinBtn.disabled = true;
         checkinBtn.innerHTML = '<i class="fas fa-check-circle"></i> Check-in realizado hoje';
         startCheckinCooldown();
     } else {
         checkinBtn.disabled = false;
-        checkinBtn.innerHTML = 'Check-in Diário';
+        checkinBtn.innerHTML = 'Daily Check-in';
     }
 }
 
 function startCheckinCooldown() {
     if (!hasCheckedInToday()) return;
-    
+
     // Função de atualização reutilizável
     function updateButton() {
         const now = new Date();
         const tomorrow = new Date();
         tomorrow.setDate(tomorrow.getDate() + 1);
         tomorrow.setHours(0, 0, 0, 0);
-        
+
         const timeLeft = tomorrow - now;
-        
+
         if (timeLeft <= 0) {
             clearInterval(cooldownInterval);
             updateCheckinButtonState();
             return;
         }
-        
+
         const hours = Math.floor(timeLeft / (1000 * 60 * 60));
         const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-        
+
         checkinBtn.innerHTML = `
-            <i class="fas fa-clock"></i> Próximo check-in em 
+            <i class="fas fa-clock"></i> Next check-in in 
             ${hours}h ${Math.round(minutes)}m
         `;
     }
 
     // Atualiza a cada minuto
     const cooldownInterval = setInterval(updateButton, 60000);
-    
+
     // Executa imediatamente
     updateButton();
 }
@@ -209,7 +209,7 @@ function startCheckinCooldown() {
 async function loadMissions() {
     try {
         console.log("[loadMissions] Iniciando carregamento de missões...");
-        
+
         if (!missionsGrid) {
             console.error("[loadMissions] Elemento missionsGrid não encontrado no DOM");
             return;
@@ -221,14 +221,14 @@ async function loadMissions() {
         // Buscar missões ativas com tratamento de erro detalhado
         let missions = [];
         let missionsError = null;
-        
+
         try {
             const response = await supabase
                 .from('missions')
                 .select('*')
                 .eq('is_active', true)
                 .order('points_reward', { ascending: false });
-            
+
             missions = response.data;
             missionsError = response.error;
         } catch (fetchError) {
@@ -241,7 +241,7 @@ async function loadMissions() {
         if (missionsError) {
             console.error("[loadMissions] Erro ao buscar missões:", missionsError);
             let errorMessage = missionsError.message || "Erro desconhecido ao carregar missões";
-            
+
             missionsGrid.innerHTML = `
                 <div class="error-message">
                     <i class="fas fa-exclamation-triangle"></i>
@@ -291,7 +291,7 @@ async function loadMissions() {
         // Adicionar missões à UI com o novo design
         missions.forEach(mission => {
             const isCompleted = completedMissionIds.includes(mission.id);
-            
+
             const missionCard = document.createElement('div');
             missionCard.className = `mission-card ${isCompleted ? 'completed' : ''}`;
             missionCard.dataset.missionId = mission.id;
@@ -300,7 +300,7 @@ async function loadMissions() {
             if (isCompleted) {
                 actionButton = `
                     <button class="mission-completed" disabled>
-                        <i class="fas fa-check-circle"></i> Completo
+                        <i class="fas fa-check-circle"></i> Done
                     </button>
                 `;
             } else if (mission.action_url) {
@@ -309,7 +309,7 @@ async function loadMissions() {
                        target="_blank" 
                        class="mission-link" 
                        data-id="${mission.id}">
-                        Visitar Link
+                        Visit Link
                     </a>
                 `;
             } else {
@@ -329,7 +329,7 @@ async function loadMissions() {
                 <p class="mission-description">${mission.description}</p>
                 <div class="mission-rewards">
                     <div class="reward-badge">
-                        <span class="reward-label">Pontos</span>
+                        <span class="reward-label">Points</span>
                         <span class="reward-value points">${mission.points_reward}</span>
                     </div>
                     <div class="reward-badge">
@@ -382,17 +382,17 @@ function setupLinkVerification() {
             e.preventDefault();
             const missionId = e.target.dataset.id;
             const link = e.target.href;
-            
+
             // Atualiza UI imediatamente
             e.target.innerHTML = '<i class="fas fa-check-circle"></i> Missão completada!';
             e.target.classList.add('completed');
             e.target.style.background = '#38a169';
             e.target.style.cursor = 'default';
             e.target.onclick = null;
-            
+
             // Abre o link em nova aba
             window.open(link, '_blank');
-            
+
             // Completa a missão no backend
             try {
                 await completeMission(missionId, e.target);
@@ -421,80 +421,90 @@ async function createNewUser(walletAddress) {
             })
             .select()
             .single();
-        
+
         if (error) throw error;
-        
+
         userData = user;
         currentUser = user;
         localStorage.setItem('sunaryumUserId', user.id);
-        
+
         updateUserUI();
     } catch (error) {
         console.error('Erro ao criar novo usuário:', error);
     }
 }
 
-// Carrega conquistas do banco de dados
 async function loadAchievements() {
     try {
         if (!achievementsGrid) return;
-        
-        // Mostrar estado de carregamento
+
         achievementsGrid.innerHTML = '<p class="loading-achievements">Carregando conquistas...</p>';
 
-        // Buscar conquistas e conquistas do usuário separadamente
-        const { data: achievements, error: achError } = await supabase
-            .from('achievements')
-            .select('*')
-            .eq('is_active', true);
-        
-        if (achError) throw achError;
-        
+        // Buscar apenas conquistas COMPLETADAS pelo usuário
         const { data: userAchievements, error: uaError } = await supabase
             .from('user_achievements')
-            .select('achievement_id')
+            .select(`
+                achievements:achievements (
+                    id, name, description, icon, points_reward,
+                    condition_type, condition_value
+                )
+            `)
             .eq('user_id', userData.id);
-        
+
         if (uaError) throw uaError;
-        
+
+        // Extrair conquistas do resultado
+        const achievements = userAchievements.map(ua => ua.achievements);
+
         // Limpar grid
         achievementsGrid.innerHTML = '';
-        
+
+        if (!achievements || achievements.length === 0) {
+            achievementsGrid.innerHTML = `
+                <div class="empty-message">
+                    <i class="fas fa-trophy"></i>
+                    <p>Nenhuma conquista completada ainda</p>
+                    <p>Complete missões para desbloquear conquistas!</p>
+                </div>
+            `;
+            return;
+        }
+
         // Adicionar conquistas à UI
         achievements.forEach(achievement => {
-            const isCompleted = userAchievements.some(
-                ua => ua.achievement_id === achievement.id
-            );
-            
+            // CORREÇÃO: Criar o elemento corretamente
             const achievementCard = document.createElement('div');
-            achievementCard.className = `achievement-card ${isCompleted ? 'completed' : ''}`;
+            achievementCard.className = 'achievement-card completed';
             
             achievementCard.innerHTML = `
                 <div class="achievement-icon">
-                    <i class="fas fa-${isCompleted ? 'trophy' : 'lock'}"></i>
+                    <i class="${achievement.icon || 'fas fa-trophy'}"></i>
                 </div>
                 <h3>${achievement.name}</h3>
                 <p>${achievement.description}</p>
-                <div class="achievement-progress">
-                    <div class="progress-bar" style="width: ${isCompleted ? '100' : '0'}%"></div>
-                </div>
                 <div class="achievement-reward">
-                    Recompensa: ${achievement.sun_reward} SUN
-                    ${isCompleted ? '<i class="fas fa-check"></i>' : ''}
+                    <i class="fas fa-award"></i> Recompensa: ${achievement.points_reward} pontos
+                    <i class="fas fa-check completed-badge"></i>
                 </div>
             `;
-            
+
             achievementsGrid.appendChild(achievementCard);
         });
     } catch (error) {
         console.error('Erro ao carregar conquistas:', error);
-        if (achievementsGrid) {
-            achievementsGrid.innerHTML = '<p class="error-achievements">Erro ao carregar conquistas</p>';
-        }
+        achievementsGrid.innerHTML = `
+            <div class="error-message">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>Erro ao carregar conquistas</p>
+            </div>
+        `;
     }
 }
 
-// Verificar conquistas
+
+
+
+
 async function checkAchievements() {
     try {
         // Buscar conquistas
@@ -502,15 +512,15 @@ async function checkAchievements() {
             .from('achievements')
             .select('id, condition_type, condition_value')
             .eq('is_active', true);
-        
+
         if (error) throw error;
-        
+
         // Verificar cada conquista
         for (const achievement of achievements) {
-            if (!achievement.condition_type || !achievement.condition_value) continue;
-            
+            if (!achievement.condition_type) continue;
+
             let conditionMet = false;
-            
+
             switch (achievement.condition_type) {
                 case 'streak':
                     conditionMet = userData.streak >= achievement.condition_value;
@@ -521,8 +531,11 @@ async function checkAchievements() {
                 case 'points':
                     conditionMet = userData.total_points >= achievement.condition_value;
                     break;
+                case 'sun_balance':
+                    conditionMet = userData.sun_balance >= achievement.condition_value;
+                    break;
             }
-            
+
             if (conditionMet) {
                 await grantAchievement(achievement.id);
             }
@@ -531,7 +544,6 @@ async function checkAchievements() {
         console.error('Erro ao verificar conquistas:', error);
     }
 }
-
 // Conceder conquista
 async function grantAchievement(achievementId) {
     try {
@@ -547,7 +559,19 @@ async function grantAchievement(achievementId) {
             return;
         }
         
-        if (existing && existing.length > 0) return;
+        if (existing && existing.length > 0) {
+            console.log(`Conquista ${achievementId} já concedida ao usuário`);
+            return;
+        }
+        
+        // Buscar dados da conquista
+        const { data: achievement, error: achievementError } = await supabase
+            .from('achievements')
+            .select('*')
+            .eq('id', achievementId)
+            .single();
+        
+        if (achievementError) throw achievementError;
         
         // Conceder conquista
         const { error } = await supabase
@@ -560,24 +584,32 @@ async function grantAchievement(achievementId) {
         
         if (error) throw error;
         
-        // Buscar dados da conquista para mostrar notificação
-        const { data: achievement, error: achievementError } = await supabase
-            .from('achievements')
-            .select('*')
-            .eq('id', achievementId)
-            .single();
+        // ATUALIZAR PONTOS DO USUÁRIO
+        const { error: userError } = await supabase
+            .from('users')
+            .update({
+                total_points: (userData.total_points || 0) + achievement.points_reward,
+                updated_at: new Date().toISOString()
+            })
+            .eq('id', userData.id);
         
-        if (!achievementError) {
-            showAchievementNotification(achievement);
-        }
+        if (userError) throw userError;
+        
+        // Atualizar dados locais do usuário
+        userData.total_points = (userData.total_points || 0) + achievement.points_reward;
+        updateUserUI();
+        
+        // Mostrar notificação
+        showAchievementNotification(achievement);
         
         // Recarregar conquistas
         await loadAchievements();
+        
+        console.log(`Conquista concedida: +${achievement.points_reward} pontos`);
     } catch (error) {
         console.error('Erro ao conceder conquista:', error);
     }
 }
-
 // Mostrar notificação de conquista
 function showAchievementNotification(achievement) {
     const notification = document.createElement('div');
@@ -588,16 +620,17 @@ function showAchievementNotification(achievement) {
         </div>
         <div class="notification-content">
             <h3>Conquista Desbloqueada!</h3>
-            <p>${achievement.name} - ${achievement.sun_reward} SUN</p>
+            <p>${achievement.name}</p>
+            <p class="reward-amount">+ ${achievement.points_reward} pontos</p>
         </div>
     `;
-    
+
     document.body.appendChild(notification);
-    
+
     setTimeout(() => {
         notification.classList.add('show');
     }, 100);
-    
+
     setTimeout(() => {
         notification.classList.remove('show');
         setTimeout(() => {
@@ -605,19 +638,18 @@ function showAchievementNotification(achievement) {
         }, 500);
     }, 5000);
 }
-
 // Configura os listeners de eventos
 function setupEventListeners() {
     // Logout
     if (logoutButton) {
         logoutButton.addEventListener('click', logout);
     }
-    
+
     // Check-in diário
     if (checkinBtn) {
         checkinBtn.addEventListener('click', handleDailyCheckin);
     }
-    
+
     // Completar missão (delegação de evento)
     if (missionsGrid) {
         missionsGrid.addEventListener('click', async (e) => {
@@ -627,11 +659,11 @@ function setupEventListeners() {
             }
         });
     }
-    
+
     // Dropdown da carteira
     const walletDropdown = document.getElementById('wallet-dropdown');
     const dropdownMenu = document.getElementById('dropdown-menu');
-    
+
     if (walletDropdown && dropdownMenu) {
         walletDropdown.addEventListener('click', () => {
             dropdownMenu.classList.toggle('active');
@@ -642,22 +674,22 @@ function setupEventListeners() {
 // Completa uma missão específica
 async function completeMission(missionId, button) {
     if (!currentUser || !userData || isProcessingMission) return;
-    
+
     isProcessingMission = true;
-    
+
     try {
         button.disabled = true;
         button.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-        
+
         // Busca os dados da missão
         const { data: mission, error: missionError } = await supabase
             .from('missions')
             .select('*')
             .eq('id', missionId)
             .single();
-        
+
         if (missionError) throw missionError;
-        
+
         // Registra missão completada
         const { error: completedError } = await supabase
             .from('completed_missions')
@@ -666,12 +698,12 @@ async function completeMission(missionId, button) {
                 mission_id: missionId,
                 completed_at: new Date().toISOString()
             });
-        
+
         if (completedError) {
             console.error('Erro ao completar missão (RLS):', completedError);
             throw completedError;
         }
-        
+
         // Atualiza pontos do usuário
         const { error: userError } = await supabase
             .from('users')
@@ -682,18 +714,18 @@ async function completeMission(missionId, button) {
                 updated_at: new Date().toISOString()
             })
             .eq('id', userData.id);
-        
+
         if (userError) throw userError;
-        
+
         // Recarrega dados do servidor
         await loadUserData();
         await loadMissions();
         await checkAchievements();
-        
+
         // Feedback visual
         button.innerHTML = 'Completo <i class="fas fa-check"></i>';
         triggerConfettiEffect();
-        
+
         console.log('Missão completada com sucesso!');
     } catch (error) {
         console.error('Erro ao completar missão:', error);
@@ -704,13 +736,12 @@ async function completeMission(missionId, button) {
     }
 }
 
-// Check-in diário
 async function handleDailyCheckin() {
     if (!currentUser || !userData || hasCheckedInToday()) return;
 
     try {
         checkinBtn.disabled = true;
-        checkinBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processando...';
+        checkinBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
         checkinBtn.classList.add('processing');
 
         const now = new Date().toISOString();
@@ -721,6 +752,10 @@ async function handleDailyCheckin() {
         const streakMultiplier = Math.min(Math.floor(newStreak / 7), 5);
         const pointsEarned = basePoints * (1 + streakMultiplier * 0.5);
 
+        // Verificação correta do primeiro login
+        const isFirstCheckin = userData.total_checkins === 0 || 
+                              (!userData.last_checkin && userData.streak === 0);
+
         // Atualiza no Supabase
         const { error } = await supabase
             .from('users')
@@ -728,19 +763,31 @@ async function handleDailyCheckin() {
                 last_checkin: now,
                 streak: newStreak,
                 total_points: (userData.total_points || 0) + pointsEarned,
+                total_checkins: (userData.total_checkins || 0) + 1,
                 updated_at: now
             })
             .eq('id', userData.id);
 
         if (error) throw error;
 
-        // Recarrega dados do servidor
+        // Atualiza dados locais imediatamente
+        userData.last_checkin = now;
+        userData.streak = newStreak;
+        userData.total_points = (userData.total_points || 0) + pointsEarned;
+        userData.total_checkins = (userData.total_checkins || 0) + 1;
+        updateUserUI();
+
+        // Concede a conquista de primeiro login se for o caso
+        if (isFirstCheckin) {
+            await grantAchievement('a1eebc99-9c0b-4ef8-bb6d-6bb9bd380a11');
+        }
+
+        // Recarrega dados do servidor para garantir sincronização
         await loadUserData();
         await checkAchievements();
         
         // Feedback visual
-        let message = `<i class="fas fa-check-circle"></i> Check-in realizado!`;
-        checkinBtn.innerHTML = message;
+        checkinBtn.innerHTML = `<i class="fas fa-check-circle"></i> Check-in realizado!`;
         checkinBtn.classList.remove('processing');
         checkinBtn.classList.add('success');
         triggerConfettiEffect();
@@ -761,27 +808,27 @@ async function handleDailyCheckin() {
 // Calcula o novo streak baseado no last_checkin
 function calculateNewStreak(lastCheckin) {
     if (!lastCheckin) return 1;
-    
+
     const lastDate = new Date(lastCheckin);
     const today = new Date();
     const yesterday = new Date(today);
     yesterday.setDate(yesterday.getDate() - 1);
-    
+
     // Resetar horas para comparar apenas a data
     lastDate.setHours(0, 0, 0, 0);
     today.setHours(0, 0, 0, 0);
     yesterday.setHours(0, 0, 0, 0);
-    
+
     // Se o último check-in foi hoje, retorna o mesmo streak
     if (lastDate.getTime() === today.getTime()) {
         return userData.streak || 1;
     }
-    
+
     // Se o último check-in foi ontem, incrementa
     if (lastDate.getTime() === yesterday.getTime()) {
         return (userData.streak || 0) + 1;
     }
-    
+
     // Se não, reseta para 1
     return 1;
 }
@@ -797,14 +844,14 @@ function logout() {
 function triggerConfettiEffect() {
     const canvas = document.getElementById('particle-canvas');
     if (!canvas) return;
-    
+
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    
+
     const particles = [];
     const particleCount = 150;
-    
+
     // Criar partículas
     for (let i = 0; i < particleCount; i++) {
         particles.push({
@@ -816,31 +863,31 @@ function triggerConfettiEffect() {
             speed: Math.random() * 5 + 2
         });
     }
-    
+
     function drawParticles() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
+
         particles.forEach(particle => {
             ctx.beginPath();
             ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
             ctx.fillStyle = particle.color;
             ctx.fill();
             ctx.closePath();
-            
+
             particle.y += particle.speed;
-            
+
             // Resetar partícula quando sair da tela
             if (particle.y > canvas.height) {
                 particle.y = -10;
                 particle.x = Math.random() * canvas.width;
             }
         });
-        
+
         requestAnimationFrame(drawParticles);
     }
-    
+
     drawParticles();
-    
+
     // Parar após 5 segundos
     setTimeout(() => {
         cancelAnimationFrame(drawParticles);
