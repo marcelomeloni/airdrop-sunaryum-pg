@@ -164,7 +164,7 @@ function updateCheckinButtonState() {
 
     if (hasCheckedInToday()) {
         checkinBtn.disabled = true;
-        checkinBtn.innerHTML = '<i class="fas fa-check-circle"></i> Check-in realizado hoje';
+        checkinBtn.innerHTML = '<i class="fas fa-check-circle"></i> Checked in today';
         startCheckinCooldown();
     } else {
         checkinBtn.disabled = false;
@@ -787,7 +787,7 @@ async function handleDailyCheckin() {
         await checkAchievements();
         
         // Feedback visual
-        checkinBtn.innerHTML = `<i class="fas fa-check-circle"></i> Check-in realizado!`;
+        checkinBtn.innerHTML = `<i class="fas fa-check-circle"></i> Check-in completed!`;
         checkinBtn.classList.remove('processing');
         checkinBtn.classList.add('success');
         triggerConfettiEffect();
