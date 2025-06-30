@@ -138,7 +138,7 @@ function updateUserUI() {
 
     // Atualiza streak
     if (streakCounter) {
-        streakCounter.innerHTML = `<strong>${userData.streak || 0} dias</strong>`;
+        streakCounter.innerHTML = `<strong>${userData.streak || 0} days</strong>`;
     }
     if (streakStat) {
         streakStat.textContent = userData.streak || 0;
@@ -262,7 +262,7 @@ async function loadMissions() {
             missionsGrid.innerHTML = `
                 <div class="empty-message">
                     <i class="fas fa-inbox"></i>
-                    <p>Nenhuma missão disponível no momento</p>
+                    <p>No missions available at the moment</p>
                     <p class="admin-hint">Dica para administrador: Verifique se há missões ativas no banco de dados</p>
                 </div>
             `;
@@ -463,8 +463,8 @@ async function loadAchievements() {
             achievementsGrid.innerHTML = `
                 <div class="empty-message">
                     <i class="fas fa-trophy"></i>
-                    <p>Nenhuma conquista completada ainda</p>
-                    <p>Complete missões para desbloquear conquistas!</p>
+                    <p>No achievements completed yet</p>
+                    <p>Complete quests to unlock achievements!</p>
                 </div>
             `;
             return;
@@ -483,7 +483,7 @@ async function loadAchievements() {
                 <h3>${achievement.name}</h3>
                 <p>${achievement.description}</p>
                 <div class="achievement-reward">
-                    <i class="fas fa-award"></i> Recompensa: ${achievement.points_reward} pontos
+                    <i class="fas fa-award"></i> Reward: ${achievement.points_reward} points
                     <i class="fas fa-check completed-badge"></i>
                 </div>
             `;
