@@ -1094,13 +1094,32 @@ A simple process to turn your renewable energy into $SUN tokens
                     Sign up to receive the latest news about the project and the airdrop
 
                 </p>
-                <form class="flex flex-col sm:flex-row gap-4">
-                    <input type="email" placeholder="Seu melhor email" class="flex-grow bg-gray-800 border border-gray-700 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
-                    <button type="submit" class="bg-primary hover:bg-accent text-secondary font-bold py-3 px-8 rounded-lg transition-colors">
-                        Subscribe
-
-                    </button>
-                </form>
+                <div class="email-form-container">
+                    <form id="emailForm" class="flex flex-col sm:flex-row gap-4">
+                      <input 
+                        type="email" 
+                        id="emailInput"
+                        placeholder="Your best email                        " 
+                        required
+                        class="flex-grow bg-gray-800 border border-gray-700 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                      >
+                      <button 
+                        type="submit" 
+                        id="submitBtn"
+                        class="bg-primary hover:bg-accent text-secondary font-bold py-3 px-8 rounded-lg transition-colors"
+                      >
+                      Subscribe
+                      </button>
+                    </form>
+                    
+                    <!-- Mensagens de feedback -->
+                    <div id="successMessage" class="mt-3 text-green-500 hidden">
+                      <i class="fas fa-check-circle mr-2"></i>Registration completed successfully!
+                    </div>
+                    <div id="errorMessage" class="mt-3 text-red-500 hidden">
+                      <i class="fas fa-exclamation-circle mr-2"></i>An error has occurred. Please try again.
+                    </div>
+                  </div>
             </div>
         </div>
     </section>
@@ -1229,8 +1248,84 @@ A simple process to turn your renewable energy into $SUN tokens
     </footer>
 
     <!-- Scripts -->
+
+    
+
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
+
+          // Configurações do Supabase (substitua com suas credenciais)
+  const SUPABASE_URL = 'https://fhamhyolyolsirfxxhan.supabase.co';
+  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZoYW1oeW9seW9sc2lyZnh4aGFuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk1NjAyMjIsImV4cCI6MjA2NTEzNjIyMn0.iQIDCKWVZpKlmbKXG60J-nUd5lK-S5Nw5GvDSqE_w1Y';
+
+  document.getElementById('emailForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const emailInput = document.getElementById('emailInput');
+    const submitBtn = document.getElementById('submitBtn');
+    const email = emailInput.value.trim();
+    
+    // Validação simples de e-mail
+    if (!validateEmail(email)) {
+      showError('Please enter a valid email address');
+      return;
+    }
+    
+    // Feedback visual durante o carregamento
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+    
+    try {
+      // Envia para o Supabase
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/emails`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_KEY,
+          'Authorization': `Bearer ${SUPABASE_KEY}`
+        },
+        body: JSON.stringify({ email })
+      });
+      
+      if (response.ok) {
+        showSuccess();
+        emailInput.value = ''; // Limpa o campo
+      } else {
+        const error = await response.json();
+        showError(error.message || 'Error registering email');
+      }
+    } catch (err) {
+      showError('Erro de conexão');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Subscribe';
+    }
+  });
+
+  // Funções auxiliares
+  function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  }
+
+  function showSuccess() {
+    const success = document.getElementById('successMessage');
+    const error = document.getElementById('errorMessage');
+    
+    success.classList.remove('hidden');
+    error.classList.add('hidden');
+    
+    setTimeout(() => success.classList.add('hidden'), 3000);
+  }
+
+  function showError(message) {
+    const error = document.getElementById('errorMessage');
+    error.innerHTML = `<i class="fas fa-exclamation-circle mr-2"></i>${message}`;
+    error.classList.remove('hidden');
+    
+    setTimeout(() => error.classList.add('hidden'), 5000);
+  }
+
         // Loader
         window.addEventListener('load', function() {
             const loader = document.getElementById('loader');
